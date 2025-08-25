@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ahda Store | متجر ملابس
+    <img src="0.jpg" alt="Black Leather Jacket for Men" title="Trendy Men's Leather Jacket" />
+
+  </title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Bootstrap 5.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root {
+      --brand:#6c5ce7;
+      --brand-2:#00d2d3;
+      --ink:#1f2937;
+      --muted:#6b7280;
+      --bg:#0b0c10;
+      --card:#111318;
+      --ring: rgba(108,92,231,.35);
+    }
+    html,body{font-family:'Cairo',sans-serif;background:linear-gradient(180deg,#0b0c10 0%,#0e1016 40%,#111318 100%);color:#e5e7eb}
+    .navbar{backdrop-filter:saturate(1.2) blur(8px); background:rgba(10,12,18,.6)}
+    .nav-link,.navbar-brand{color:#e5e7eb!important}
+    .btn-brand{background:linear-gradient(135deg,var(--brand),var(--brand-2));border:0; border-radius:1rem; font-weight:600}
+    .btn-brand:hover{filter:brightness(1.05)}
+    .hero{background: radial-gradient(1200px 400px at 70% -10%, rgba(108,92,231,.25), transparent 60%),
+                     radial-gradient(800px 300px at 10% 0%, rgba(0,210,211,.18), transparent 60%);}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); box-shadow:0 10px 30px rgba(0,0,0,.35);}
+    .filter-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)}
+    
+    /* --- تحسين كروت المنتجات --- */
+    .product-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 1.5rem;
+      transition: transform .25s ease, box-shadow .25s ease;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .product-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 28px rgba(0,0,0,.45);
+    }
+    .product-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1.15;
+      object-fit: cover;
+      border-top-left-radius: 1.5rem;
+      border-top-right-radius: 1.5rem;
+    }
+    .product-card h6 {
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    .product-card .price {
+      font-size: 1.05rem;
+      color: var(--brand-2);
+      font-weight: 700;
+    }
+    .product-card .btn {
+      border-radius: 1rem;
+      padding: .5rem .8rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    #productsGrid > div {display:flex;}
+    
+    .badge-glow{box-shadow:0 0 0 3px var(--ring);}
+    .rating i{color:#fbbf24}
+    .offcanvas, .modal-content{background:var(--card); color:#e5e7eb; border: 1px solid rgba(255,255,255,.08)}
+    .form-control, .form-select{background:#0f1218; color:#e5e7eb; border:1px solid rgba(255,255,255,.12)}
+    .form-control::placeholder{color:#9ca3af}
+    .footer{border-top:1px solid rgba(255,255,255,.08)}
+    .pointer{cursor:pointer}
+    .img-cover{object-fit:cover}
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container py-2">
+      <a class="navbar-brand fw-bold" href="#"><i class="bi bi-bag-heart me-2"></i>Ahda Store</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#products">المنتجات</a></li>
+          <li class="nav-item"><a class="nav-link" href="#reviews">ريفيوز</a></li>
+        </ul>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-light" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas"><i class="bi bi-cart3 me-2"></i>عربة التسوق<span class="badge text-bg-danger ms-2" id="cartCount">0</span></button>
+          <a class="btn btn-brand" href="#newsletter"><i class="bi bi-lightning-charge me-1"></i>عروض اليوم</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero py-5 py-lg-6">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <div class="hero-card rounded-4 p-4 p-lg-5">
+            <span class="badge text-bg-dark border badge-glow mb-3"><i class="bi bi-stars me-1"></i>موضة الموسم</span>
+            <h1 class="display-5 fw-extrabold lh-sm">جدّد الستايل بتاعك مع <span class="text-info">Ahda Store</span></h1>
+            <p class="text-secondary mt-3">تشكيلة قوية من تيشيرتات، هوديز، بناطيل، وشنط. شحن سريع داخل مصر وخصومات للطلب الأول.</p>
+            <div class="d-flex gap-2 mt-3">
+              <a href="#products" class="btn btn-brand btn-lg"><i class="bi bi-bag-plus me-1"></i>تسوّق الآن</a>
+              <a href="#filters" class="btn btn-outline-light btn-lg"><i class="bi bi-sliders me-1"></i>فلترة سريعة</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop" class="img-fluid rounded-4 shadow" alt="أزياء شبابية"/>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filters -->
+  <section id="filters" class="py-4">
+    <div class="container">
+      <div class="filter-card rounded-4 p-3 p-lg-4">
+        <div class="row g-3 align-items-end">
+          <div class="col-md-3">
+            <label class="form-label">الفئة</label>
+            <select id="categorySelect" class="form-select">
+              <option value="all">الكل</option>
+              <option value="تيشيرت">تيشيرت</option>
+              <option value="هودي">هودي</option>
+              <option value="بنطال">بنطال</option>
+              <option value="حقيبة">حقيبة</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">البحث</label>
+            <input id="searchInput" class="form-control" placeholder="اكتب اسم المنتج..." />
+          </div>
+          <div class="col-md-3">
+            <label for="priceRange" class="form-label">السعر (حتى): <span id="priceLabel">1500</span> جنيه</label>
+            <input type="range" id="priceRange" class="form-range" min="100" max="3000" step="50" value="1500" />
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">ترتيب</label>
+            <select id="sortSelect" class="form-select">
+              <option value="none">بدون</option>
+              <option value="price-asc">السعر: من الأرخص</option>
+              <option value="price-desc">السعر: من الأغلى</option>
+              <option value="rating-desc">الأعلى تقييماً</option>
+            </select>
+          </div>
+          <div class="col-md-1 d-grid">
+            <button id="resetBtn" class="btn btn-outline-light"><i class="bi bi-arrow-counterclockwise"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products" class="py-4">
+    <div class="container">
+      <div id="productsGrid" class="row g-4"></div>
+    </div>
+  </section>
+
+  <!-- باقي الكود (Reviews + Newsletter + Footer + Cart + Modal + Toast) زي ما هو ... -->
+  <!-- نفس الجافاسكربت اللي عندك، الفرق الوحيد في `productCard` -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const fmt = n => new Intl.NumberFormat('ar-EG').format(n) + ' ج.م';
+    const products = [
+      {id:1,title:'تيشيرت أوفر سايز أسود',category:'تيشيرت',price:399,rating:4.5,img:'https://images.unsplash.com/photo-1514861939622-cfc6731f0b98?q=80&w=900&auto=format&fit=crop',badge:'جديد',desc:'قماش قطن 100% مريح ومناسب للصيف.'},
+      {id:2,title:'هودي سادة رمادي',category:'هودي',price:899,rating:4.8,img:'https://images.unsplash.com/photo-1593030668930-813c8a3eaf6c?q=80&w=900&auto=format&fit=crop',badge:'خصم',desc:'هودي ثقيل بخامة فاخرة وخياطة قوية.'},
+      {id:3,title:'بنطال جينز سكيني',category:'بنطال',price:749,rating:4.2,img:'https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=900&auto=format&fit=crop',badge:null,desc:'جينز مرن ومريح، مقاساته مظبوطة.'},
+      {id:4,title:'حقيبة ظهر كاجوال',category:'حقيبة',price:520,rating:4.1,img:'https://images.unsplash.com/photo-1547949003-9792a18a2601?q=80&w=900&auto=format&fit=crop',badge:'Hot',desc:'مثالية للجامعة أو الشغل، جيوب كتير.'},
+      {id:5,title:'تيشيرت أبيض كلاسِك',category:'تيشيرت',price:350,rating:4.0,img:'https://images.unsplash.com/photo-1520975922203-baf23a7f6f18?q=80&w=900&auto=format&fit=crop',badge:null,desc:'Basic لا غنى عنه في الدولاب.'},
+      {id:6,title:'هودي أسود مطبوع',category:'هودي',price:990,rating:4.9,img:'https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=900&auto=format&fit=crop',badge:'جديد',desc:'تصميم شبابي وخامة سوبر تقيلة.'},
+      {id:7,title:'بنطال كارغو زيتوني',category:'بنطال',price:820,rating:4.3,img:'https://images.unsplash.com/photo-1548883354-7622d4789527?q=80&w=900&auto=format&fit=crop',badge:'خصم',desc:'جيوب متعددة وستايل عصري.'},
+      {id:8,title:'شنطة كتف جلد',category:'حقيبة',price:640,rating:4.6,img:'https://images.unsplash.com/photo-1610395219791-21f334f49140?q=80&w=900&auto=format&fit=crop',badge:null,desc:'جلد صناعي عالي الجودة ومتين.'}
+    ];
+    const state={filters:{category:'all',q:'',max:1500,sort:'none'},cart:[]};
+
+    document.addEventListener('DOMContentLoaded',()=>{renderProducts()});
+
+    function renderProducts(){
+      const grid=document.getElementById('productsGrid');
+      let list=products.filter(p=>(state.filters.category==='all'||p.category===state.filters.category)&&p.price<=state.filters.max&&p.title.includes(state.filters.q));
+      switch(state.filters.sort){case 'price-asc':list.sort((a,b)=>a.price-b.price);break;case 'price-desc':list.sort((a,b)=>b.price-a.price);break;case 'rating-desc':list.sort((a,b)=>b.rating-a.rating);break;}
+      grid.innerHTML=list.map(p=>productCard(p)).join('');
+    }
+    function makeStars(r){const full=Math.floor(r),half=r-full>=.5;let html='';for(let i=0;i<full;i++)html+='<i class="bi bi-star-fill"></i>';if(half)html+='<i class="bi bi-star-half"></i>';for(let i=full+(half?1:0);i<5;i++)html+='<i class="bi bi-star"></i>';return html;}
+    function productCard(p){
+      return `
+      <div class="col-6 col-md-4 col-lg-3 col-xxl-2">
+        <div class="product-card">
+          <div class="position-relative">
+            ${p.badge?`<span class="badge text-bg-dark position-absolute m-2 badge-glow">${p.badge}</span>`:''}
+            <img src="${p.img}" alt="${p.title}"/>
+            <button class="btn btn-sm btn-brand position-absolute bottom-0 start-0 m-2"><i class="bi bi-eye me-1"></i>نظرة سريعة</button>
+          </div>
+          <div class="p-3 d-flex flex-column flex-grow-1">
+            <div class="small text-secondary">${p.category}</div>
+            <h6 class="mb-1">${p.title}</h6>
+            <div class="d-flex align-items-center justify-content-between mt-auto">
+              <div class="rating small">${makeStars(p.rating)}</div>
+              <div class="price">${fmt(p.price)}</div>
+            </div>
+            <button class="btn btn-outline-light mt-2"><i class="bi bi-bag-plus me-1"></i>أضف للسلة</button>
+          </div>
+        </div>
+      </div>`;}
+  </script>
+</body>
+</html>
